@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NOTHINGBYHARSH — Video Editor & Creator. Reels, YouTube, Ads and Sound Design by Harsh Mevada." />
+  <title>NOTHINGBYHARSH — Video Editor</title>
+  <style>
+    :root{
+      --bg:#050505;
+      --surface:#0d0d0d;
+      --text:#f4f4f4;
+      --muted:#9a9a9a;
+      --line:#222;
+      --red:#ff3030;
+      --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;
+      line-height:1.5;overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+    header{
+      position:fixed;top:0;left:0;width:100%;z-index:20;
+      backdrop-filter:blur(14px);background:rgba(5,5,5,.72);
+      border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:15px;font-weight:900;letter-spacing:.14em}
+    .logo span{color:var(--red)}
+    .navlinks{display:flex;gap:30px;font-size:13px;color:#bbb}
+    .navlinks a{transition:.25s}
+    .navlinks a:hover{color:#fff}
+    .menu{display:none;background:none;border:0;color:#fff;font-size:25px}
+    .hero{min-height:100vh;display:grid;place-items:center;padding:140px 0 90px;position:relative}
+    .hero:after{
+      content:"";position:absolute;width:420px;height:420px;border-radius:50%;
+      background:var(--red);filter:blur(150px);opacity:.08;right:-160px;top:20%;
+      pointer-events:none
+    }
+    .eyebrow{color:var(--red);font-size:12px;font-weight:800;letter-spacing:.2em;margin-bottom:24px}
+    h1{font-size:clamp(55px,10vw,125px);line-height:.88;letter-spacing:-.07em;max-width:1000px}
+    h1 span{color:var(--red)}
+    .hero-copy{max-width:680px;color:#aaa;font-size:18px;margin-top:30px}
+    .buttons{display:flex;gap:12px;margin-top:35px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;
+      border:1px solid #333;font-size:12px;font-weight:800;letter-spacing:.08em;
+      transition:.25s;cursor:pointer
+    }
+    .btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+    .btn:hover{transform:translateY(-2px);border-color:#666}
+    .btn.primary:hover{background:#e51f1f}
+    section{padding:110px 0;border-top:1px solid var(--line)}
+    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:45px}
+    .section-number{font-size:12px;color:var(--red);font-weight:800;letter-spacing:.18em}
+    h2{font-size:clamp(38px,6vw,70px);letter-spacing:-.05em;line-height:1}
+    .section-note{color:#777;max-width:330px;font-size:13px}
+    .projects{display:grid;grid-template-columns:minmax(0,760px);justify-content:center;gap:20px}
+    .project{background:var(--surface);border:1px solid var(--line);overflow:hidden}
+    .video-box{
+      aspect-ratio:16/9;background:#090909;display:grid;place-items:center;position:relative;
+      overflow:hidden
+    }
+    .video-box video{width:100%;height:100%;object-fit:cover;display:block}
+    .drive-box{min-height:260px;padding:28px;background:radial-gradient(ellipse at center,rgba(255,48,48,.12),transparent 65%);border-bottom:1px solid var(--line)}
+    .drive-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;width:100%}
+    .drive-icon{display:grid;place-items:center;width:56px;height:56px;border:1px solid #383838;border-radius:50%;font-size:28px;color:var(--red)}
+    .drive-label{font-size:11px;letter-spacing:.18em;color:#999;font-weight:800}
+    .drive-btn{min-width:190px;min-height:50px;gap:12px;border-radius:4px}
+    .drive-hint{font-size:12px;color:#777}
+    @media(max-width:520px){.drive-box{min-height:220px;padding:20px}.drive-btn{width:100%;max-width:280px}}
+    .placeholder{position:absolute;inset:0;display:grid;place-items:center;color:#555;font-size:12px;letter-spacing:.12em}
+    .project-info{padding:25px}
+    .project-top{display:flex;justify-content:space-between;gap:20px}
+    .project h3{font-size:25px;letter-spacing:-.03em}
+    .tag{color:var(--red);font-size:10px;font-weight:800;letter-spacing:.12em}
+    .project p{color:#777;font-size:13px;margin-top:10px;max-width:540px}
+    .services{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+    .service{padding:30px 22px;border-right:1px solid var(--line);min-height:210px}
+    .service:last-child{border-right:0}
+    .service-num{color:var(--red);font-size:11px;font-weight:800}
+    .service h3{font-size:21px;margin-top:45px}
+    .service p{font-size:12px;color:#777;margin-top:12px}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+    .about-big{font-size:clamp(28px,4vw,48px);line-height:1.05;letter-spacing:-.04em}
+    .about-big span{color:var(--red)}
+    .about-text{color:#888;font-size:15px;max-width:520px}
+    .facts{display:grid;grid-template-columns:1fr 1fr;margin-top:35px;border-top:1px solid var(--line)}
+    .fact{padding:18px 0;border-bottom:1px solid var(--line)}
+    .fact small{display:block;color:#555;font-size:10px;letter-spacing:.12em}
+    .fact strong{display:block;margin-top:5px}
+    .contact{min-height:75vh;display:grid;align-items:center}
+    .contact h2{max-width:900px;font-size:clamp(55px,9vw,110px)}
+    .contact h2 span{color:var(--red)}
+    .contact-sub{color:#777;margin-top:25px;max-width:520px}
+    .contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    footer{border-top:1px solid var(--line);padding:25px 0;color:#555;font-size:11px;display:flex;justify-content:space-between}
+    .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s ease,transform .8s ease}
+    .reveal.show{opacity:1;transform:none}
+    @media(max-width:800px){
+      .navlinks{display:none}
+      .menu{display:block}
+      .projects,.about-grid{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr 1fr}
+      .service:nth-child(2){border-right:0}
+      .service:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .section-head{display:block}
+      .section-note{margin-top:15px}
+    }
+    @media(max-width:520px){
+      .wrap{width:min(calc(100% - 28px),var(--max))}
+      nav{height:68px}
+      .hero{padding-top:120px}
+      h1{font-size:58px}
+      .hero-copy{font-size:16px}
+      section{padding:80px 0}
+      .services{grid-template-columns:1fr}
+      .service{border-right:0!important;border-bottom:1px solid var(--line)!important}
+      .service:last-child{border-bottom:0!important}
+      .facts{grid-template-columns:1fr}
+      footer{display:block}
+      footer div+div{margin-top:8px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#home">NOTHING<span>BY</span>HARSH</a>
+      <div class="navlinks">
+        <a href="#work">WORK</a>
+        <a href="#services">SERVICES</a>
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+      </div>
+      <button class="menu" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="wrap reveal">
+      <div class="eyebrow">VIDEO EDITOR & CREATOR / PALANPUR, GUJARAT</div>
+      <h1>I EDIT.<br><span>YOU CREATE.</span></h1>
+      <p class="hero-copy">Cinematic, engaging and clean video edits for creators, brands and businesses.</p>
+      <div class="buttons">
+        <a class="btn primary" href="#work">VIEW MY WORK</a>
+        <a class="btn" href="#contact">LET'S WORK TOGETHER</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-number">01 / SELECTED WORK</div>
+          <h2>THE WORK.</h2>
+        </div>
+        <p class="section-note">A small selection of edits. More work can be added as the portfolio grows.</p>
+      </div>
+
+      <div class="projects">
+        <article class="project reveal">
+          <div class="video-box drive-box">
+            <div class="drive-card">
+              <span class="drive-icon" aria-hidden="true">↗</span>
+              <p class="drive-label">PROJECT PREVIEW</p>
+              <a class="btn primary drive-btn" href="https://drive.google.com/drive/folders/1NtivMdRAXsDJdfJej-M_mlSvizUo282-?usp=sharing" target="_blank" rel="noopener noreferrer">VIEW VIDEO <span aria-hidden="true">↗</span></a>
+              <p class="drive-hint">Opens in Google Drive</p>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-top">
+              <h3>Client Reel</h3><span class="tag">01 / REEL</span>
+            </div>
+            <p>Short-form edit focused on pacing, captions and detailed sound editing.</p>
+          </div>
+        </article>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-number">02 / SERVICES</div>
+          <h2>WHAT I DO.</h2>
+        </div>
+      </div>
+      <div class="services">
+        <div class="service reveal"><span class="service-num">01</span><h3>SHORT-FORM</h3><p>Reels and Shorts built around strong pacing and viewer retention.</p></div>
+        <div class="service reveal"><span class="service-num">02</span><h3>YOUTUBE</h3><p>Clean edits, storytelling, pacing and sound for long-form content.</p></div>
+        <div class="service reveal"><span class="service-num">03</span><h3>ADS</h3><p>Creative edits that communicate the message clearly and quickly.</p></div>
+        <div class="service reveal"><span class="service-num">04</span><h3>SOUND</h3><p>Sound editing and effects that add depth without overloading the video.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="section-number">03 / ABOUT</div>
+          <h2>BEHIND THE EDIT.</h2>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-big reveal">
+          I'm <span>Harsh Mevada.</span><br>
+          A video editor focused on making ideas feel worth watching.
+        </div>
+        <div class="reveal">
+          <p class="about-text">I've been editing for 6 months using DaVinci Resolve Studio. I work across reels, YouTube content and ads, with a particular focus on sound editing and clean, purposeful visuals.</p>
+          <div class="facts">
+            <div class="fact"><small>EXPERIENCE</small><strong>6 MONTHS</strong></div>
+            <div class="fact"><small>SOFTWARE</small><strong>DAVINCI RESOLVE STUDIO</strong></div>
+            <div class="fact"><small>LOCATION</small><strong>PALANPUR, GUJARAT</strong></div>
+            <div class="fact"><small>LANGUAGE</small><strong>ENGLISH</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap reveal">
+      <div class="section-number">04 / CONTACT</div>
+      <h2>HAVE AN IDEA?<br><span>LET'S EDIT IT.</span></h2>
+      <p class="contact-sub">You bring the idea. I'll take care of the edit.</p>
+      <div class="contact-links">
+        <a class="btn primary" href="mailto:harshmevada0007@gmail.com">EMAIL ME</a>
+        <a class="btn" href="https://instagram.com/nothingbyharsh" target="_blank" rel="noopener">INSTAGRAM</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>© 2026 NOTHINGBYHARSH</div>
+  <div>HARSH MEVADA / VIDEO EDITOR</div>
+</footer>
+
+<script>
+  function toggleMenu(){
+    const links=document.querySelector('.navlinks');
+    const open=links.style.display==='flex';
+    links.style.display=open?'none':'flex';
+    if(!open){
+      links.style.position='absolute';
+      links.style.top='68px';
+      links.style.left='0';
+      links.style.width='100%';
+      links.style.padding='20px';
+      links.style.background='#050505';
+      links.style.flexDirection='column';
+      links.style.borderBottom='1px solid #222';
+    }
+  }
+
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('show');
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+</script>
+</body>
+</html>
